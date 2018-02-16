@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const Profile = props => {
   return(  
-    <Text>
+    <Text backgroundColor="cyan">
     {
       `${props.profile.login.username}`
     }
@@ -46,21 +46,21 @@ export default class App extends React.Component {
      return (
 
       // This Works 
-      <View style={styles.container}>
-        <Profile profile={profile[0]}/>
-      </View>
+      // <View style={styles.container}>
+      //   <Profile profile={profile[0]}/>
+      // </View>
       // But this doesnot work
-//       <ScrollView style={styles.container}>
-//       <Profile profile={profile[0]}/>
-//       <Profile profile={profile[1]}/>
-//       </ScrollView>
+      <ScrollView>
+       <View style={styles.container}>
+         <Profile profile={profile[0]}/>
+       </View>
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

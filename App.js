@@ -1,6 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View ,ScrollView } from 'react-native';
 import axios from 'axios'
+
+const Profile = props => {
+  return(  
+    <Text>
+    {
+      `${props.profile.login.username}`
+    }
+    </Text>)
+}
 
 export default class App extends React.Component {
 
@@ -15,7 +24,8 @@ export default class App extends React.Component {
 
   async getUsers(){
     this.setState({loading:true})
-    const apiData = await axios.get(`https://randomuser.me/api?results=5`)
+    // const apiLogin = await axios.get('')
+    const apiData = await axios.get(`https://randomuser.me/api?results=100`)
     this.setState({profile: apiData.data.results,loading:false})
     
   }
@@ -23,12 +33,7 @@ export default class App extends React.Component {
   
 
   render() {
-    // const name = this.state.profile[0].login.username
-
     const {profile, loading ,name ,friend } = this.state
-
-    
-   
 
     if (loading){
       return (
@@ -38,29 +43,18 @@ export default class App extends React.Component {
       );
     }
 
-
      return (
-    <View style={styles.container}>
-        <Text>{profile[0].login.username}</Text>
-    </View>
+
+      // This Works 
+      <View style={styles.container}>
+        <Profile profile={profile[0]}/>
+      </View>
+      // But this doesnot work
+//       <ScrollView style={styles.container}>
+//       <Profile profile={profile[0]}/>
+//       <Profile profile={profile[1]}/>
+//       </ScrollView>
     )
-
-    // else if (profile.length>0){
-
-    // return (
-    //   <View style={styles.container}>
-    //     <Text>{profile[0].login.username}</Text>
-    //   </View>
-    // );
-
-    // } else {
-
-    //   return (
-    //     <View style={styles.container}>
-    //       <Text>{'poonam'}</Text>
-    //     </View>
-    //   );
-    // }
   }
 }
 
